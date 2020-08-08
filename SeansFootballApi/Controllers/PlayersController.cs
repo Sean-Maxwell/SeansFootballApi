@@ -29,18 +29,20 @@ namespace SeansFootballApi.Controllers
             // Create a http GET request to our football API endpoint
             // api-football-v1.p.rapidapi.com
             
-            HttpRequestMessage playerRequestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.footystats.org/league-matches?key=example&league_id=1625");
+            HttpRequestMessage playerRequestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api-football-v1.p.rapidapi.com/v2/leagues/type/league");
+            playerRequestMessage.Headers.Add("X-RapidAPI-Key", "d991d39e8184b5d34b914766562d8187");
 
             // Adding the API key on the header to the request message
             //test85g57
-           
+
 
             //Create an empty HTTP client object
             HttpClient playerHttpClient = httpClient.CreateClient();
             //Asynchronously sends the player request message and get the response.
             var response = await playerHttpClient.SendAsync(playerRequestMessage);
+            var resp = await response.Content.ReadAsStringAsync();
 
-            
+
             return response;
         }
 
