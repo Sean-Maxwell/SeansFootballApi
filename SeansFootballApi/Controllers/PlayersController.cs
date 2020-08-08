@@ -24,24 +24,24 @@ namespace SeansFootballApi.Controllers
 
         // GET: api/<PlayersController>
         [HttpGet]
-        public async Task<HttpResponseMessage> Get()
+        public async Task<string> Get()
         {
             // Create a http GET request to our football API endpoint
             // api-football-v1.p.rapidapi.com
             
-            HttpRequestMessage playerRequestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.footystats.org/league-matches?key=example&league_id=1625");
+            HttpRequestMessage playerRequestMessage = new HttpRequestMessage(HttpMethod.Get, "https://api.footystats.org/league-matches?key=test85g57&league_id=1625");
 
             // Adding the API key on the header to the request message
             //test85g57
-           
+
 
             //Create an empty HTTP client object
             HttpClient playerHttpClient = httpClient.CreateClient();
             //Asynchronously sends the player request message and get the response.
             var response = await playerHttpClient.SendAsync(playerRequestMessage);
-
+            var resp = await response.Content.ReadAsStringAsync();
             
-            return response;
+            return resp;
         }
 
         // GET api/<PlayersController>/5
