@@ -10,12 +10,12 @@ namespace SeansFootballApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     
-    public class ValuesController : ControllerBase
+    public class TeamsController : ControllerBase
     {
         //Field
         private IHttpClientFactory httpClient;
 
-        public ValuesController(IHttpClientFactory httpClient)
+        public TeamsController(IHttpClientFactory httpClient)
         {
             this.httpClient = httpClient;
         }
@@ -23,19 +23,20 @@ namespace SeansFootballApi.Controllers
 
         // GET: api/<ValuesController>
         [HttpGet]
-        public async Task<HttpResponseMessage> Get()
+        public async Task<string> Get()
         {
             // newsapi.org API KEY - 9c5119fef0294cab86be895047a58f00
             //Insert API into ""
             HttpRequestMessage newsRequestMessage = new HttpRequestMessage(HttpMethod.Get,
-                "http://newsapi.org/v2/top-headlines?country=us&apiKey=9c5119fef0294cab86be895047a58f00");
+                "https://my-json-server.typicode.com/Sean-Maxwell/json-data/teams");
 
             //Creating an empty http client
             HttpClient playerHttpClient = httpClient.CreateClient();
 
             var response = await playerHttpClient.SendAsync(newsRequestMessage);
+            var resp = await response.Content.ReadAsStringAsync();
 
-            return response;
+            return resp;
         }
 
 
